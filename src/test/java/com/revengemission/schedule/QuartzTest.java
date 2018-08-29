@@ -31,8 +31,8 @@ public class QuartzTest {
 
     @Test
     @Ignore
-    public void formatDate(){
-        SimpleDateFormat cron=new SimpleDateFormat("ss mm HH dd MM ? yyyy");
+    public void formatDate() {
+        SimpleDateFormat cron = new SimpleDateFormat("ss mm HH dd MM ? yyyy");
         System.out.println(cron.format(new Date()));
     }
 
@@ -40,25 +40,16 @@ public class QuartzTest {
     @Ignore
     public void testQuartz() {
         try {
-            System.out.println("【系统启动】开始(每1秒输出一次)...");
+            System.out.println("【系统启动】开始(每1分钟输出一次)...");
             Map<String, Object> parameterData = new HashMap<>();
             parameterData.put("parameter1", "111");
             parameterData.put("parameter2", "定时发送");
-            quartzManager.addJob(JOB_NAME, JOB_GROUP_NAME, TRIGGER_NAME, TRIGGER_GROUP_NAME, HelloJob.class, "0 58 13 17 7 ? 2017", parameterData);
+            quartzManager.addJob(JOB_NAME, JOB_GROUP_NAME, TRIGGER_NAME, TRIGGER_GROUP_NAME, HelloJob.class, "0 * * * * ? 2018", parameterData);
 
             while (quartzManager.countJobs() > 0) {
-
-                Thread.sleep(1000);
+                System.out.println("job count " + quartzManager.countJobs());
+                Thread.sleep(60000);
             }
-            /*Thread.sleep(5000);
-            System.out.println("【修改时间】开始(每5秒输出一次)...");
-            quartzManager.modifyJobTime(JOB_NAME, JOB_GROUP_NAME, TRIGGER_NAME, TRIGGER_GROUP_NAME, "0/5 * * * * ?");*/
-
-
-            //Thread.sleep(600000);
-            // System.out.println("【移除定时】开始...");
-            //quartzManager.removeJob(JOB_NAME, JOB_GROUP_NAME, TRIGGER_NAME, TRIGGER_GROUP_NAME);
-            //System.out.println("【移除定时】成功");
         } catch (Exception e) {
             e.printStackTrace();
         }

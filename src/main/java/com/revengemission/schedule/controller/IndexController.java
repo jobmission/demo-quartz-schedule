@@ -21,7 +21,10 @@ public class IndexController {
     public ResponseMessage index() {
 
         ResponseMessage responseMessage = new ResponseMessage();
-        //todo do job here,see unit test
+        /*quartzManager.modifyJobTime(JOB_NAME, JOB_GROUP_NAME, TRIGGER_NAME, TRIGGER_GROUP_NAME, "0/5 * * * * ?");*//*
+        System.out.println("【移除定时】开始...");
+        quartzManager.removeJob(JOB_NAME, JOB_GROUP_NAME, TRIGGER_NAME, TRIGGER_GROUP_NAME);
+        System.out.println("【移除定时】成功");*/
 
         responseMessage.setResponseCode("SUCCESS");
         return responseMessage;
